@@ -42,7 +42,7 @@ export default function page() {
         onSubmit={onSubmit}
       >
         <h3 className="w-fit text-md font-bold text-indigo-950 mx-auto mt-2">
-          S'inscrire
+          S&apos;inscrire
         </h3>
         <Inputs
           register={register}

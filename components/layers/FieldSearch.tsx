@@ -73,7 +73,7 @@ export default function FieldSearch() {
 
   useEffect(() => {
     setFormData({ ...formData, sportType: selectedSport.value });
-  }, [selectedSport.value]);
+  }, [formData, selectedSport.value]);
 
   function getLocation() {
     Geocode.fromLatLng("48.8583701", "2.2922926").then(
@@ -144,7 +144,9 @@ export default function FieldSearch() {
         console.log(formData);
       }}
     >
-      <h4 className="mb-4 text-slate-600">Trouver l'espace de jeu idéal</h4>
+      <h4 className="mb-4 text-slate-600">
+        Trouver l&apos;espace de jeu idéal
+      </h4>
 
       {/* --------------------------------------------------------------------------------------------------------------------- */}
 

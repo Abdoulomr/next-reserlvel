@@ -11,21 +11,20 @@ type FormValues = {
   password: string;
 };
 
-const resolver: Resolver<FormValues> = async (values) => {
-  return {
-    values: values.email ? values : {},
-    errors: !values.password
-      ? {
-          email: {
-            type: "required",
-            message: "Veillez saisir votre adresse email",
-          },
-        }
-      : {},
-  };
-};
-
 export default function page() {
+  const resolver: Resolver<FormValues> = async (values) => {
+    return {
+      values: values.email ? values : {},
+      errors: !values.password
+        ? {
+            email: {
+              type: "required",
+              message: "Veillez saisir votre adresse email",
+            },
+          }
+        : {},
+    };
+  };
   const {
     register,
     handleSubmit,

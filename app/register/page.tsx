@@ -3,7 +3,7 @@ import ButtonInput from "@/components/inputs/ButtonInput";
 import Inputs from "@/components/inputs/Inputs";
 import Link from "next/link";
 import React from "react";
-import { useForm, Resolver } from "react-hook-form";
+import { useForm as UseForm, Resolver } from "react-hook-form";
 
 type FormValues = {
   name: string;
@@ -29,7 +29,7 @@ export default function page() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>({ resolver });
+  } = UseForm<FormValues>({ resolver });
   const onSubmit = handleSubmit((data) => console.log(data));
   return (
     <>

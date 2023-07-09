@@ -3,33 +3,36 @@ import ButtonInput from "@/components/inputs/ButtonInput";
 import Inputs from "@/components/inputs/Inputs";
 import Link from "next/link";
 import React from "react";
-import { useForm as UseForm, Resolver } from "react-hook-form";
+import { useForm as UseForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
-type FormValues = {
-  name: string;
-  email: string;
-  password: string;
-};
+const schema = yup
+  .object({
+    fullName: yup
+      .string()
+      .required("Veillez saisir votre nom complet")
+      .min(2, "Trop court!")
+      .max(25, "Trop Long!"),
+    email: yup
+      .string()
+      .required("Veillez saisir votre adresse e-mail")
+      .email("adresse e-mail invalide"),
+    password: yup
+      .string()
+      .required("Veillez saisir votre mot de passe")
+      .min(8, "Votre mot de passe doit faire au moins 8 carractères")
+      .max(60, "Votre mot de passe doit faire au plus 60 carractères"),
+    createdOn: yup.date().default(() => new Date()),
+  })
+  .required();
 
 export default function page() {
-  const resolver: Resolver<FormValues> = async (values) => {
-    return {
-      values: values.email ? values : {},
-      errors: !values.password
-        ? {
-            email: {
-              type: "required",
-              message: "Veillez saisir votre adresse email",
-            },
-          }
-        : {},
-    };
-  };
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = UseForm<FormValues>({ resolver });
+  } = UseForm({ resolver: yupResolver(schema) });
   const onSubmit = handleSubmit((data) => console.log(data));
   return (
     <>
@@ -38,7 +41,7 @@ export default function page() {
       </h1>
 
       <form
-        className="flex flex-col justify-center shadow-md items-center gap-5 w-[95vw] mx-auto max-w-md py-5 px-5 mt-4 bg-slate-50 rounded-sm"
+        className="flex flex-col justify-center shadow-md items-center gap-6 w-[95vw] mx-auto max-w-md py-5 px-5 mt-4 bg-slate-50 rounded-sm"
         onSubmit={onSubmit}
       >
         <h3 className="w-fit text-md font-bold text-indigo-950 mx-auto mt-2">
@@ -49,18 +52,21 @@ export default function page() {
           type="text"
           label="Prénom et Nom"
           value="fullName"
+          errors={errors}
         />
         <Inputs
           register={register}
           type="email"
           label="Adresse Email"
           value="email"
+          errors={errors}
         />
         <Inputs
           register={register}
           type="password"
           label="Mot de passe"
           value="password"
+          errors={errors}
         />
         <ButtonInput
           bgColor="bg-indigo-950"

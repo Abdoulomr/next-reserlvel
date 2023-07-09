@@ -1,5 +1,4 @@
 import FieldSearch from "@/components/layers/FieldSearch";
-import Image from "next/image";
 export default function Home() {
   return (
     <div className="w-full h-screen flex flex-col gap-4 items-center justify-center bg-[url('/pitch.jpg')] bg-cover bg-no-repeat">

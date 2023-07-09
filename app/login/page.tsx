@@ -4,6 +4,7 @@ import Inputs from "@/components/inputs/Inputs";
 import Link from "next/link";
 import React from "react";
 import { useForm as UseForm, Resolver } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 type FormValues = {
   email: string;

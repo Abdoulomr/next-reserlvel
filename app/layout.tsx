@@ -1,9 +1,6 @@
 import Navbar from "./Navbar";
 import "./globals.css";
 import { Inter } from "next/font/google";
-import { Suspense } from "react";
-import Loadingui from "./loading";
-
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -21,7 +18,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Navbar />
         <main className="absolute w-full min-h-screen flex flex-col gap-2 items-center justify-center bg-indigo-950">
-          <Suspense fallback={<Loadingui />}> {children} </Suspense>
+          {children}
         </main>
       </body>
     </html>

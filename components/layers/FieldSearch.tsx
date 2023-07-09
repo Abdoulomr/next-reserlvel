@@ -24,23 +24,43 @@ const sportOptions = [
 ];
 
 type searchVenueDataType = {
-  sportType: string;
+  sportType: string | undefined;
   location: string;
 };
 
 export default function FieldSearch() {
   const [selectedSport, setSelectedSport] = useState({
     id: 0,
-    value: "",
+    value: undefined,
     title: "Choix du sport",
     icon: <FcSportsMode />,
   });
-
-  const [sportOptionsVisible, setSportOptionsVisible] = useState(false);
-  const [formData, setFormData] = useState<searchVenueDataType>({
-    sportType: selectedSport.value,
-    location: "",
+  const [formData, setFormData] = useState<searchVenueDataType>(() => {
+    return {
+      sportType: selectedSport.value,
+      location: "",
+    };
   });
+  const [sportOptionsVisible, setSportOptionsVisible] = useState(false);
+
+  function handleSportSelect(item: any) {
+    setSelectedSport((prev) => ({
+      ...prev,
+      value: item.value,
+      title: item.title,
+      icon: item.sportIcon,
+      id: item.id,
+    }));
+
+    setSportOptionsVisible(false);
+  }
+  //  Handle Form selected Sport
+  useEffect(() => {
+    setFormData((prevState) => ({
+      ...prevState,
+      sportType: selectedSport.value,
+    }));
+  }, [sportOptionsVisible]);
 
   const displayOptions =
     sportOptionsVisible &&
@@ -59,21 +79,6 @@ export default function FieldSearch() {
         </div>
       );
     });
-
-  function handleSportSelect(item: any) {
-    setSelectedSport({
-      ...selectedSport,
-      value: item.value,
-      title: item.title,
-      icon: item.sportIcon,
-      id: item.id,
-    });
-    setSportOptionsVisible(false);
-  }
-
-  useEffect(() => {
-    setFormData({ ...formData, sportType: selectedSport.value });
-  }, [formData, selectedSport.value]);
 
   function getLocation() {
     Geocode.fromLatLng("48.8583701", "2.2922926").then(

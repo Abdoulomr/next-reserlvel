@@ -20,13 +20,13 @@ export default function Navbar() {
   };
 
   const navLinks = [
-    { path: "/", title: "Accueil", id: 0, icon: <HiHome /> },
-    { path: "/login", title: "Se connecter", id: 1, icon: <HiUser /> },
-    { path: "/register", title: "S'inscrire", id: 2, icon: <HiUserPlus /> },
+    { path: "/", title: "Accueil", id: 1, icon: <HiHome /> },
+    { path: "/login", title: "Se connecter", id: 2, icon: <HiUser /> },
+    { path: "/register", title: "S'inscrire", id: 3, icon: <HiUserPlus /> },
     {
       path: "/partner",
       title: "Devenir partenaire",
-      id: 3,
+      id: 4,
       icon: <SiHandshake />,
     },
   ];
@@ -52,7 +52,7 @@ export default function Navbar() {
               key={id}
               href={path}
               className={`text-indigo-950 text-xl sm:text-sm flex items-center gap-1 font-bold hover:opacity-80 transition-all duration-150 ${
-                id === 3 && "text-white bg-indigo-950 py-2 px-6 rounded-md"
+                id === 4 && "text-white bg-indigo-950 py-2 px-6 rounded-md"
               }`}
               onClick={closeNavbar}
             >

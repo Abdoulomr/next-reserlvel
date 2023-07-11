@@ -69,7 +69,7 @@ export default function FieldSearch() {
         <div
           key={sport.id}
           className={`flex  z-10 m-0 cursor-pointer items-center bg-slate-50 hover:bg-indigo-900 hover:text-white w-full justify-start gap-2 p-3 
-          ${sport.id === sportOptions.length && "rounded-b-sm"}
+          ${sport.id === sportOptions.length && "rounded-b-sm"}s
           ${sport.id === 1 && "rounded-t-sm"}
           `}
           onClick={() => handleSportSelect(sport)}

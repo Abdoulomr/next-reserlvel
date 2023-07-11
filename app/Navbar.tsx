@@ -7,6 +7,7 @@ import Styles from "../styles/Nav.module.css";
 import { RiRoadMapFill } from "react-icons/ri";
 import { HiUser, HiUserPlus, HiHome } from "react-icons/hi2";
 import { SiHandshake } from "react-icons/si";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [navVisible, setNavVisible] = useState<boolean>(false);
@@ -31,6 +32,8 @@ export default function Navbar() {
     },
   ];
 
+  const pathName = usePathname();
+
   return (
     <header className="z-50 flex fixed w-screen top-0 left-0 shadow-sm right-0 justify-between px-10 sm:px-5 md:px-0 md:justify-around items-center h-[80px] bg-slate-50">
       <Link
@@ -51,9 +54,13 @@ export default function Navbar() {
             <Link
               key={id}
               href={path}
-              className={`text-indigo-950 text-xl sm:text-sm flex items-center gap-1 font-bold hover:opacity-80 transition-all duration-150 ${
-                id === 4 && "text-white bg-indigo-950 py-2 px-6 rounded-md"
-              }`}
+              className={`text-indigo-950 w-fit justify-center p-3 transition-colors duration-300 rounded-md text-lg sm:text-sm flex items-center gap-1 font-bold hover:bg-slate-200 
+              ${pathName === path && id !== 4 && "text-indigo-800"}
+              ${
+                id === 4 &&
+                "text-white ml-0 md:ml-2 max-w-fit bg-indigo-950 hover:text-indigo-950 py-3 px-6 rounded-md"
+              }
+              `}
               onClick={closeNavbar}
             >
               {icon}
@@ -63,7 +70,7 @@ export default function Navbar() {
         })}
       </nav>
       <div
-        className="flex items-center cursor-pointer justify-center z-[901] w-fit h-fit sm:hidden"
+        className="flex items-center cursor-pointer justify-center z-[901] w-fit h-fit md:hidden"
         onClick={toggleNavbar}
       >
         {!navVisible ? (

@@ -6,14 +6,15 @@ import React from "react";
 import { useForm as UseForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { Rubik } from "next/font/google";
+
+const rubik = Rubik({
+  subsets: ["latin"],
+  weight: ["400"],
+});
 
 const schema = yup
   .object({
-    fullName: yup
-      .string()
-      .required("Veillez saisir votre nom complet")
-      .min(2, "Trop court!")
-      .max(25, "Trop Long!"),
     email: yup
       .string()
       .required("Veillez saisir votre adresse e-mail")
@@ -23,7 +24,6 @@ const schema = yup
       .required("Veillez saisir votre mot de passe")
       .min(8, "Votre mot de passe doit faire au moins 8 carractères")
       .max(60, "Votre mot de passe doit faire au plus 60 carractères"),
-    createdOn: yup.date().default(() => new Date()),
   })
   .required();
 
@@ -33,27 +33,22 @@ export default function page() {
     handleSubmit,
     formState: { errors },
   } = UseForm({ resolver: yupResolver(schema) });
-  const onSubmit = handleSubmit((data) => console.log(data));
+  const onSubmit = handleSubmit((data: any) => console.log(data));
   return (
     <>
-      <h1 className="text-4xl mt-10 font-extrabold text-slate-300">
+      <h1
+        className={`${rubik.className} text-2xl underline mt-10 font-normal text-indigo-950`}
+      >
         Bienvennue
       </h1>
 
       <form
-        className="flex flex-col justify-center shadow-md items-center gap-6 w-[95vw] mx-auto max-w-md py-5 px-5 mt-4 bg-slate-50 rounded-sm"
+        className="flex flex-col justify-center shadow-md items-center gap-5 w-[95vw] mx-auto max-w-md py-5 px-5 mt-4 bg-slate-50 rounded-sm"
         onSubmit={onSubmit}
       >
         <h3 className="w-fit text-md font-bold text-indigo-950 mx-auto mt-2">
-          S&apos;inscrire
+          Se connecter
         </h3>
-        <Inputs
-          register={register}
-          type="text"
-          label="Prénom et Nom"
-          value="fullName"
-          errors={errors}
-        />
         <Inputs
           register={register}
           type="email"
@@ -75,12 +70,12 @@ export default function page() {
         />
 
         <div className="w-full mt-2 flex justify-center gap-2 items-center">
-          <small>Déjà inscrit ?</small>
+          <small>pas encore inscrit ?</small>
           <Link
             className="text-sm text-indigo-600 hover:text-indigo-700"
-            href="/login"
+            href="/user/register"
           >
-            Se connecter
+            S&apos;inscrire
           </Link>
         </div>
       </form>

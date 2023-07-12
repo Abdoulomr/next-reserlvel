@@ -1,9 +1,9 @@
 "use client";
-import { InfinitySpin } from "react-loader-spinner";
+import { ClipLoader } from "react-spinners";
 export default function Loading() {
   return (
     <>
-      <InfinitySpin width="200" color="#312e81" />
+      <ClipLoader color="#312e81" size={70} />
     </>
   );
 }

@@ -22,8 +22,13 @@ export default function Navbar() {
 
   const navLinks = [
     { path: "/", title: "Accueil", id: 1, icon: <HiHome /> },
-    { path: "/login", title: "Se connecter", id: 2, icon: <HiUser /> },
-    { path: "/register", title: "S'inscrire", id: 3, icon: <HiUserPlus /> },
+    { path: "/user/login", title: "Se connecter", id: 2, icon: <HiUser /> },
+    {
+      path: "/user/register",
+      title: "S'inscrire",
+      id: 3,
+      icon: <HiUserPlus />,
+    },
     {
       path: "/partner",
       title: "Devenir partenaire",
@@ -54,7 +59,7 @@ export default function Navbar() {
             <Link
               key={id}
               href={path}
-              className={`text-indigo-950 w-fit justify-center p-3 transition-colors duration-300 rounded-md text-lg sm:text-sm flex items-center gap-1 font-bold hover:bg-slate-200 
+              className={`text-indigo-950 font-medium w-fit justify-center p-3 transition-colors duration-100 rounded-md text-lg sm:text-sm flex items-center gap-1 hover:bg-slate-200 
               ${pathName === path && id !== 4 && "text-indigo-800"}
               ${
                 id === 4 &&
